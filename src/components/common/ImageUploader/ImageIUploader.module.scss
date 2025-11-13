@@ -1,0 +1,34 @@
+@use "src/scss/mixins/text" as text;
+@use "src/scss/variables" as variables;
+@use "src/scss/mixins/utility" as utility;
+
+.dropzone_container {
+  display: grid;
+  position: relative;
+}
+
+.input {
+  @include utility.hidden();
+}
+
+.dropzone {
+  @include utility.focus();
+  align-items: center;
+  border: 1px dashed variables.$main-border-color;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 200px;
+  min-width: 500px;
+
+  &:hover:not(.dropzone_disabled) {
+    border-color: variables.$main-active-border-color;
+  }
+}
+
+.dropzone_text {
+  @include text.textRegular-14();
+}

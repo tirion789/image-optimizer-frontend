@@ -1,0 +1,19 @@
+@use "src/scss/mixins/text" as text;
+
+body {
+  @include text.textRegular-14();
+  background: linear-gradient(59deg, #121423 -1.16%, #1f1d32 87.22%);
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 50px;
+  text-size-adjust: none;
+}
+
+html {
+  height: 100%;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}

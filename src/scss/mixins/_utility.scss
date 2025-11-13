@@ -1,0 +1,32 @@
+@use "../variables" as variables;
+
+@mixin hidden {
+  height: 0;
+  line-height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 0;
+}
+
+@mixin focus {
+  outline: none;
+
+  &:focus:not(:disabled) {
+    box-shadow: variables.$basic-box-shadow;
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  &:focus-visible:not(:disabled) {
+    box-shadow: variables.$basic-box-shadow;
+  }
+}
+
+@mixin disabled {
+  cursor: default;
+  pointer-events: none;
+}

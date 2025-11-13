@@ -1,0 +1,9 @@
+@use "./scss/mixins/text" as text;
+@use "./scss/variables" as variables;
+
+.title {
+  @include text.textRegular-32();
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

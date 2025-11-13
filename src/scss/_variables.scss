@@ -1,0 +1,25 @@
+// FONT FAMILY
+
+$font-family-roboto: "Ubuntu", sans-serif;
+
+// FONT WEIGHTS
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+
+// COLORS
+
+$main-color: linear-gradient(59deg, #121423 -1.16%, #1f1d32 87.22%);
+$main-text-color: rgba(255, 255, 255, 1);
+$main-border-color: #97a1bc;
+$main-active-border-color: #00ffff;
+
+// BOX-SHADOWS
+
+/* stylelint-disable-next-line scss/dollar-variable-colon-space-after */
+$basic-box-shadow:
+  0 0 0 1px transparent,
+  0 0 0 2px #223c50;

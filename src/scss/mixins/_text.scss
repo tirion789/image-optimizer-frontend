@@ -1,0 +1,20 @@
+@use "../variables" as variables;
+
+@mixin basic-text {
+  color: variables.$main-text-color;
+  font-family: variables.$font-family-roboto;
+  font-style: normal;
+  line-height: normal;
+}
+
+@mixin textRegular-14 {
+  @include basic-text();
+  font-size: 14px;
+  font-weight: variables.$font-weight-regular;
+}
+
+@mixin textRegular-32 {
+  @include basic-text();
+  font-size: 32px;
+  font-weight: variables.$font-weight-medium;
+}
