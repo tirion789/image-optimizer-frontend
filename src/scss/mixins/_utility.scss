@@ -10,11 +10,11 @@
   width: 0;
 }
 
-@mixin focus {
+@mixin focus() {
   outline: none;
 
   &:focus:not(:disabled) {
-    box-shadow: variables.$basic-box-shadow;
+    box-shadow: red;
   }
 
   &:focus:not(:focus-visible) {
@@ -22,7 +22,7 @@
   }
 
   &:focus-visible:not(:disabled) {
-    box-shadow: variables.$basic-box-shadow;
+    box-shadow: red;
   }
 }
 

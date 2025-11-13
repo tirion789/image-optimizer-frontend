@@ -5,5 +5,5 @@ export type OptimizedImagesType = {
 };
 
 export interface ImagesListProps {
-  images: Array<File> | Array<OptimizedImagesType>;
+  images: FileList | Array<OptimizedImagesType>;
 }
