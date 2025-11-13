@@ -4,6 +4,7 @@ import { API_PATH } from 'constants/api';
 
 export const optimizedImages = async (
   files: FileList | null,
+  qualityPercentage: string,
   setOptimizedImages: (data: Array<OptimizedImagesType>) => void
 ) => {
   if (!files) {
@@ -16,7 +17,10 @@ export const optimizedImages = async (
   filesArray.forEach((file) => formData.append('images', file));
 
   try {
-    const { data } = await axios.post(`/api/${API_PATH.optimize}?quality=100&format=png`, formData);
+    const { data } = await axios.post(
+      `/api/${API_PATH.optimize}?quality=${qualityPercentage}&format=png`,
+      formData
+    );
     setOptimizedImages(data);
   } catch (error) {
     console.log(error);

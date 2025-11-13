@@ -27,6 +27,10 @@
   &:hover:not(.dropzone_disabled) {
     border-color: variables.$main-active-border-color;
   }
+
+  &:focus {
+    border-color: variables.$main-active-border-color;
+  }
 }
 
 .dropzone_text {

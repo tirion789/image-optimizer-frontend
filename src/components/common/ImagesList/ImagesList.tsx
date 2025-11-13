@@ -1,10 +1,15 @@
+import { memo } from 'react';
+
 import styles from './ImagesList.module.scss';
 import { ImagesListProps } from './ImagesList.props';
 
-export const ImagesList = ({ images }: ImagesListProps) => {
+export const ImagesList = memo(({ images }: ImagesListProps) => {
+  const isFileList = images instanceof FileList;
+  const currentArray = isFileList ? Array.from(images) : images;
+
   return (
     <ul className={styles.list}>
-      {images.map((file, index) => {
+      {currentArray.map((file, index) => {
         const isFile = file instanceof File;
         return (
           <li
@@ -26,4 +31,4 @@ export const ImagesList = ({ images }: ImagesListProps) => {
       })}
     </ul>
   );
-};
+});
