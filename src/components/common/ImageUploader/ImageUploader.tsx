@@ -57,7 +57,7 @@ export const ImageUploader = memo(({ setInitialFiles }: ImageUploaderProps) => {
         onChange={(event) => handleChangeInputFiles(event)}
         onClick={(event) => event.stopPropagation()}
         multiple
-        accept="image/*"
+        accept="image/png, image/jpeg, image/jpg, image/svg+xml, image/webp, image/avif"
       />
     </label>
   );

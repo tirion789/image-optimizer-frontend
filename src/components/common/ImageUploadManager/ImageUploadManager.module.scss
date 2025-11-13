@@ -1,5 +1,9 @@
 .content {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+}
+
+.button {
+  margin-top: 25px;
 }

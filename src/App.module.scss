@@ -3,7 +3,9 @@
 
 .title {
   @include text.textRegular-32();
-  align-items: center;
   display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  max-width: 500px;
+  text-align: center;
 }
