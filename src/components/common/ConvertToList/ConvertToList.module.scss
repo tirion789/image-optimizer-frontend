@@ -1,7 +1,6 @@
 @use "src/scss/mixins/reset" as reset;
 
 .list {
-  @include reset.list-style-none();
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   margin: 0 auto;

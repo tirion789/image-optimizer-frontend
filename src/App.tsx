@@ -6,7 +6,7 @@ const App = () => {
     <div className="App">
       <main>
         <h1 className={styles.title}>
-          Загрузити фото любого формата для оптимизации и конвертации
+          Загрузите фото любого формата для оптимизации и конвертации
         </h1>
         <ImageUploadManager />
       </main>

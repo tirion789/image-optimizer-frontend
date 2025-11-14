@@ -1,9 +1,20 @@
 import classNames from 'classnames';
 import { ChangeEvent, DragEvent, memo, useRef } from 'react';
 import { useKeyPress } from 'hooks/useKeyPress';
+import { acceptUploadFormats } from 'constants/convert';
 
+import { ReactComponent as LoadIcon } from '../../../assets/images/svg/load.svg';
 import styles from './ImageIUploader.module.scss';
 import { ImageUploaderProps } from './ImageUploaderProps.props';
+
+const allowedTypes = new Set([
+  'image/png',
+  'image/jpeg',
+  'image/jpg',
+  'image/svg+xml',
+  'image/webp',
+  'image/avif',
+]);
 
 export const ImageUploader = memo(({ setInitialFiles }: ImageUploaderProps) => {
   const labelFileLoaderClassNames = classNames(styles.dropzone);
@@ -18,14 +29,21 @@ export const ImageUploader = memo(({ setInitialFiles }: ImageUploaderProps) => {
   const handleDrop = (event: DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
+    const filesArray = Array.from(files);
+    const containsAnInvalidFiles = filesArray.some(({ type }) => !allowedTypes.has(type));
+
+    if (containsAnInvalidFiles) {
+      return;
+    }
+
     setInitialFiles(files);
   };
 
-  const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
+  const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
   };
 
-  const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
+  const handleDragEnter = (event: DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
   };
 
@@ -47,7 +65,10 @@ export const ImageUploader = memo(({ setInitialFiles }: ImageUploaderProps) => {
       className={labelFileLoaderClassNames}
       htmlFor="fileUploader"
     >
-      <span className={styles.dropzone_text}>Перетащите ваши файлы сюда, либо кликните</span>
+      <div className={styles.dropzone_text}>
+        <span>Перетащите ваши файлы сюда, либо кликните</span>
+        <LoadIcon className={styles.icon} />
+      </div>
       <input
         ref={fileInputRef}
         tabIndex={-1}
@@ -57,7 +78,7 @@ export const ImageUploader = memo(({ setInitialFiles }: ImageUploaderProps) => {
         onChange={(event) => handleChangeInputFiles(event)}
         onClick={(event) => event.stopPropagation()}
         multiple
-        accept="image/png, image/jpeg, image/jpg, image/svg+xml, image/webp, image/avif"
+        accept={acceptUploadFormats}
       />
     </label>
   );

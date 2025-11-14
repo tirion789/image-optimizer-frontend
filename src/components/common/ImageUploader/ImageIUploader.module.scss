@@ -11,6 +11,11 @@
   @include utility.hidden();
 }
 
+.icon {
+  height: 64px;
+  width: 64px;
+}
+
 .dropzone {
   @include utility.focus();
   align-items: center;
@@ -36,4 +41,8 @@
 
 .dropzone_text {
   @include text.textRegular-14();
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
