@@ -15,8 +15,9 @@ export const ImageUploadManager = () => {
   const [optimizedFiles, setOptimizedFiles] = useState<Array<OptimizedImagesType>>([]);
   const [qualityPercentage, setQualityPercentage] = useState(MAX_QUALITY_PERCENTAGE);
   const [currentFormat, setCurrentFormat] = useState<ConvertFormats>(DEFAULT_FORMAT);
+  const [isLoadingRequest, setIsLoadingRequest] = useState(false);
 
-  const handleOptimizedImages = (optimizedImages: Array<OptimizedImagesType>) => {
+  const handleSetOptimizedImages = (optimizedImages: Array<OptimizedImagesType>) => {
     setOptimizedFiles(optimizedImages);
   };
 
@@ -29,6 +30,20 @@ export const ImageUploadManager = () => {
     setCurrentFormat(format);
   }, []);
 
+  const renderLoadingOrList = () => {
+    if (isLoadingRequest) {
+      return <p>Загрузка...</p>;
+    }
+    if (!isLoadingRequest && initialFiles) {
+      return (
+        <ImagesList
+          className={styles.image_list}
+          images={optimizedFiles.length ? optimizedFiles : initialFiles}
+        />
+      );
+    }
+  };
+
   return (
     <div className={styles.content}>
       <InputRange
@@ -39,21 +54,24 @@ export const ImageUploadManager = () => {
         inputId={'qualityRange'}
       />
       <ConvertToList
-        initialFiles={initialFiles}
+        isDisabled={isLoadingRequest}
         currentFormat={currentFormat}
         setActiveConvertFormat={handleSetActiveFormat}
       />
       <ImageUploader setInitialFiles={setInitialFiles} />
-
-      {initialFiles && (
-        <ImagesList images={optimizedFiles.length ? optimizedFiles : initialFiles} />
-      )}
+      {renderLoadingOrList()}
       <Button
-        isDisabled={!initialFiles?.length}
+        isDisabled={!initialFiles?.length || isLoadingRequest}
         version="default"
         className={styles.button}
         onClick={() =>
-          optimizedImages(initialFiles, qualityPercentage, currentFormat, handleOptimizedImages)
+          optimizedImages(
+            initialFiles,
+            qualityPercentage,
+            currentFormat,
+            handleSetOptimizedImages,
+            setIsLoadingRequest
+          )
         }
       >
         Оптимизировать все файлы

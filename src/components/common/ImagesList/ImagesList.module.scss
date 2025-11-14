@@ -1,7 +1,6 @@
 @use "src/scss/mixins/reset" as reset;
 
 .list {
-  @include reset.list-style-none();
   display: grid ();
   gap: 25px;
   grid-template-columns: repeat(6, 1fr);
@@ -9,4 +8,10 @@
 
 .image {
   height: 100%;
+}
+
+.item {
+  display: grid;
+  gap: 8px;
+  grid-template-rows: 1fr max-content;
 }

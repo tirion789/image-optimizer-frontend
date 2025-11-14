@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import styles from './Button.module.scss';
-import { ButtonCommonProps } from './Button.props';
+import { ButtonProps } from './Button.props';
 
 export const Button = ({
   onClick,
@@ -9,8 +9,11 @@ export const Button = ({
   isDisabled = false,
   className,
   version,
+  tag = 'button',
   isActive,
-}: ButtonCommonProps) => {
+  href,
+  download,
+}: ButtonProps) => {
   const buttonClassName = classNames(
     styles.button,
     styles[version],
@@ -18,9 +21,13 @@ export const Button = ({
     className
   );
 
-  return (
+  return tag === 'button' ? (
     <button disabled={isDisabled} onClick={onClick} className={buttonClassName}>
       {children}
     </button>
+  ) : (
+    <a download={download} onClick={onClick} className={buttonClassName} href={href}>
+      {children}
+    </a>
   );
 };

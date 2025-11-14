@@ -1,14 +1,17 @@
 import { memo } from 'react';
+import { Button } from 'components/ui/Button';
+import classNames from 'classnames';
 
 import styles from './ImagesList.module.scss';
 import { ImagesListProps } from './ImagesList.props';
 
-export const ImagesList = memo(({ images }: ImagesListProps) => {
+export const ImagesList = memo(({ images, className }: ImagesListProps) => {
   const isFileList = images instanceof FileList;
   const currentArray = isFileList ? Array.from(images) : images;
+  const listClassnames = classNames(styles.list, className);
 
   return (
-    <ul className={styles.list}>
+    <ul className={listClassnames}>
       {currentArray.map((file, index) => {
         const isFile = file instanceof File;
         return (
@@ -22,9 +25,15 @@ export const ImagesList = memo(({ images }: ImagesListProps) => {
               alt={`${isFile ? file.name : file.originalName}-image`}
             />
             {!isFile && (
-              <a href={file.optimizedData} download={file.optimizedName}>
+              <Button
+                href={file.optimizedData}
+                version="default"
+                tag="a"
+                className={styles.download}
+                download={file.optimizedName}
+              >
                 Скачать изображение
-              </a>
+              </Button>
             )}
           </li>
         );

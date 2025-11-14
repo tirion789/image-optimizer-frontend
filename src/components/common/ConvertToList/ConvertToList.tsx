@@ -8,7 +8,7 @@ import { ConvertToListProps } from './ConvertToList.props';
 // const ICO_FORMAT = 'image/x-icon';
 
 export const ConvertToList = memo(
-  ({ setActiveConvertFormat, currentFormat, initialFiles }: ConvertToListProps) => {
+  ({ setActiveConvertFormat, currentFormat, isDisabled }: ConvertToListProps) => {
     // const isCurrentAndConvertFormatIco = (format: ConvertFormats) => {
     //   if (initialFiles) {
     //     const filesArray = Array.from(initialFiles);
@@ -28,7 +28,7 @@ export const ConvertToList = memo(
             <Button
               isActive={currentFormat === format}
               version="helper"
-              //   isDisabled={isCurrentAndConvertFormatIco(format)}
+              isDisabled={isDisabled}
               onClick={() => setActiveConvertFormat(format)}
             >
               Convet to {format}
