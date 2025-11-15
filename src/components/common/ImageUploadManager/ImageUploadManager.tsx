@@ -1,10 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { Button, ConvertToList, ImagesList, ImageUploader, InputRange } from 'components';
+import { Button, ConvertToList, ImagesList, ImageUploader, InputRange, Loader } from 'components';
 import { optimizedImages } from 'api/optimized-images';
 import { ConvertFormats } from 'types/formats';
+import { OptimizedImagesType } from 'types/files';
 
 import styles from './ImageUploadManager.module.scss';
-import { OptimizedImagesType } from '../ImagesList/ImagesList.props';
 
 const MAX_QUALITY_PERCENTAGE = '100';
 const MIN_QUALITY_PERCENTAGE = '1';
@@ -30,20 +30,6 @@ export const ImageUploadManager = () => {
     setCurrentFormat(format);
   }, []);
 
-  const renderLoadingOrList = () => {
-    if (isLoadingRequest) {
-      return <p>Загрузка...</p>;
-    }
-    if (!isLoadingRequest && initialFiles) {
-      return (
-        <ImagesList
-          className={styles.image_list}
-          images={optimizedFiles.length ? optimizedFiles : initialFiles}
-        />
-      );
-    }
-  };
-
   return (
     <div className={styles.content}>
       <InputRange
@@ -59,7 +45,14 @@ export const ImageUploadManager = () => {
         setActiveConvertFormat={handleSetActiveFormat}
       />
       <ImageUploader setInitialFiles={setInitialFiles} />
-      {renderLoadingOrList()}
+      {isLoadingRequest ? (
+        <Loader className={styles.loader} />
+      ) : (
+        <ImagesList
+          className={styles.image_list}
+          images={optimizedFiles.length ? optimizedFiles : initialFiles}
+        />
+      )}
       <Button
         isDisabled={!initialFiles?.length || isLoadingRequest}
         version="default"
@@ -74,7 +67,7 @@ export const ImageUploadManager = () => {
           )
         }
       >
-        Оптимизировать все файлы
+        {isLoadingRequest ? 'Файлы оптимизируются' : 'Оптимизировать все файлы'}
       </Button>
     </div>
   );

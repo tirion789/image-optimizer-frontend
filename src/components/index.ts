@@ -4,3 +4,4 @@ export * from './common/ImagesList';
 export * from './common/ConvertToList';
 export * from './ui/InputRange';
 export * from './ui/Button';
+export * from './common/Loader';
