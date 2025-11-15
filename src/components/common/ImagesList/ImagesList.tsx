@@ -29,10 +29,14 @@ export const ImagesList = memo(({ images, className }: ImagesListProps) => {
               alt={`${isFile ? file.name : file.originalName}-image`}
             />
             {!isFile && (
-              <p className={styles.size}>
-                {formatFileSize(file.prevSize)} to {formatFileSize(file.size)}
-              </p>
+              <div>
+                <p className={styles.size}>
+                  {formatFileSize(file.prevSize)} to {formatFileSize(file.size)}
+                </p>
+                <p className={styles.size}></p>
+              </div>
             )}
+
             {!isFile && (
               <Button
                 href={file.optimizedData}
