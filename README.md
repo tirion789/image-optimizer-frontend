@@ -4,11 +4,10 @@
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)
-![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
 **Мощный инструмент для оптимизации и конвертации изображений**
 
-[Особенности](#-особенности) • [Быстрый старт](#-быстрый-старт) • [API](#-api) • [Примеры](#-примеры)
+[Особенности](#-особенности) • [Быстрый старт](#-быстрый-старт) • [API](#-api)
 
 </div>
 
@@ -30,7 +29,17 @@
 ### Установка и запуск
 
 1. **Клонируйте репозиторий**
-   ```bash
    git clone <your-repo-url>
    cd image-optimizer-frontend
-   ```
+2. **Установите зависимости**
+
+   yarn install
+
+3. **Запустите проект**
+   yarn start
+
+### API
+
+    Для работы конвертора и оптимизации изображений необходимо запустить бэкенд-сервер!
+
+    Backend репозиторий: https://github.com/tirion789/image-optimizer-backend
