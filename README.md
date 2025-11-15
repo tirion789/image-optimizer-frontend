@@ -32,9 +32,7 @@
    git clone <your-repo-url>
    cd image-optimizer-frontend
 2. **Установите зависимости**
-
    yarn install
-
 3. **Запустите проект**
    yarn start
 
