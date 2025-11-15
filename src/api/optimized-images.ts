@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { OptimizedImagesType } from 'components/common/ImagesList/ImagesList.props';
 import { API_PATH } from 'constants/api';
 import { Dispatch, SetStateAction } from 'react';
+import { OptimizedImagesType } from 'types/files';
 
 export const optimizedImages = async (
   files: FileList | null,
@@ -29,6 +29,7 @@ export const optimizedImages = async (
   } catch (error) {
     console.log(error);
   } finally {
-    setIsLoadingRequest(false);
+    // чтобы не так быстро пропадал лоадер
+    setTimeout(() => setIsLoadingRequest(false), 500);
   }
 };

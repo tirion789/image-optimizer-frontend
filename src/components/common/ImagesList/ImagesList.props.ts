@@ -1,10 +1,6 @@
-export type OptimizedImagesType = {
-  originalName: string;
-  optimizedData: string;
-  optimizedName: string;
-};
+import { InitialFiles, OptimizedImagesType } from 'types/files';
 
 export interface ImagesListProps {
-  images: FileList | Array<OptimizedImagesType>;
+  images: InitialFiles | Array<OptimizedImagesType>;
   className: string;
 }

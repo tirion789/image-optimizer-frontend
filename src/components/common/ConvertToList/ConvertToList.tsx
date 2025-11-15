@@ -31,7 +31,7 @@ export const ConvertToList = memo(
               isDisabled={isDisabled}
               onClick={() => setActiveConvertFormat(format)}
             >
-              Convet to {format}
+              Перевести в {format}
             </Button>
           </li>
         ))}

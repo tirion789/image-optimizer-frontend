@@ -8,10 +8,16 @@
 
 .image {
   height: 100%;
+  min-height: 250px;
+  object-fit: cover;
 }
 
 .item {
   display: grid;
   gap: 8px;
   grid-template-rows: 1fr max-content;
+}
+
+.size {
+  text-align: center;
 }

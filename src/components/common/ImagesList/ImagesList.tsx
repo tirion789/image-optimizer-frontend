@@ -1,11 +1,15 @@
 import { memo } from 'react';
 import { Button } from 'components/ui/Button';
 import classNames from 'classnames';
+import { formatFileSize } from 'helpers/formats';
 
 import styles from './ImagesList.module.scss';
 import { ImagesListProps } from './ImagesList.props';
 
 export const ImagesList = memo(({ images, className }: ImagesListProps) => {
+  if (!images) {
+    return;
+  }
   const isFileList = images instanceof FileList;
   const currentArray = isFileList ? Array.from(images) : images;
   const listClassnames = classNames(styles.list, className);
@@ -24,6 +28,11 @@ export const ImagesList = memo(({ images, className }: ImagesListProps) => {
               src={isFile ? URL.createObjectURL(file) : file.optimizedData}
               alt={`${isFile ? file.name : file.originalName}-image`}
             />
+            {!isFile && (
+              <p className={styles.size}>
+                {formatFileSize(file.prevSize)} to {formatFileSize(file.size)}
+              </p>
+            )}
             {!isFile && (
               <Button
                 href={file.optimizedData}
