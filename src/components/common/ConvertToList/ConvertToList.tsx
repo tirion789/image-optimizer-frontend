@@ -9,18 +9,6 @@ import { ConvertToListProps } from './ConvertToList.props';
 
 export const ConvertToList = memo(
   ({ setActiveConvertFormat, currentFormat, isDisabled }: ConvertToListProps) => {
-    // const isCurrentAndConvertFormatIco = (format: ConvertFormats) => {
-    //   if (initialFiles) {
-    //     const filesArray = Array.from(initialFiles);
-    //     const typesArray = filesArray.map(({ type }) => type);
-    //     if (typesArray.includes(ICO_FORMAT) && format === 'ico') {
-    //       return true;
-    //     }
-
-    //     return false;
-    //   }
-    // };
-
     return (
       <ul className={styles.list}>
         {formats.map((format, index) => (
