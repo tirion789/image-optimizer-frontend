@@ -8,7 +8,7 @@ import styles from './ImageUploadManager.module.scss';
 
 const MAX_QUALITY_PERCENTAGE = '100';
 const MIN_QUALITY_PERCENTAGE = '1';
-const DEFAULT_FORMAT = 'png';
+const DEFAULT_FORMAT = 'webp';
 
 export const ImageUploadManager = () => {
   const [initialFiles, setInitialFiles] = useState<FileList | null>(null);

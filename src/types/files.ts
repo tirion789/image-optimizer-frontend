@@ -6,6 +6,7 @@ export type OptimizedImagesType = {
   originalName: string;
   optimizedData: string;
   optimizedName: string;
+  prevFormat: string;
   format: ConvertFormats;
   quality: string;
   prevSize: number;
