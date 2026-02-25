@@ -16,70 +16,73 @@ const allowedTypes = new Set([
   'image/avif',
 ]);
 
-export const ImageUploader = memo(({ setInitialFiles }: ImageUploaderProps) => {
-  const labelFileLoaderClassNames = classNames(styles.dropzone);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const fileLabelRef = useRef<HTMLLabelElement>(null);
+export const ImageUploader = memo(
+  ({ setInitialFiles, handleSetOptimizedImages }: ImageUploaderProps) => {
+    const labelFileLoaderClassNames = classNames(styles.dropzone);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const fileLabelRef = useRef<HTMLLabelElement>(null);
 
-  const handleChangeInputFiles = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    setInitialFiles(files);
-  };
+    const handleChangeInputFiles = (event: ChangeEvent<HTMLInputElement>) => {
+      handleSetOptimizedImages([]);
+      const files = event.target.files;
+      setInitialFiles(files);
+    };
 
-  const handleDrop = (event: DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    const filesArray = Array.from(files);
-    const containsAnInvalidFiles = filesArray.some(({ type }) => !allowedTypes.has(type));
+    const handleDrop = (event: DragEvent<HTMLLabelElement>) => {
+      event.preventDefault();
+      const files = event.dataTransfer.files;
+      const filesArray = Array.from(files);
+      const containsAnInvalidFiles = filesArray.some(({ type }) => !allowedTypes.has(type));
 
-    if (containsAnInvalidFiles) {
-      return;
-    }
+      if (containsAnInvalidFiles) {
+        return;
+      }
 
-    setInitialFiles(files);
-  };
+      setInitialFiles(files);
+    };
 
-  const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-  };
+    const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
+      event.preventDefault();
+    };
 
-  const handleDragEnter = (event: DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-  };
+    const handleDragEnter = (event: DragEvent<HTMLLabelElement>) => {
+      event.preventDefault();
+    };
 
-  const handleClickInput = () => {
-    if (document.activeElement === fileLabelRef.current) {
-      fileInputRef.current?.click();
-    }
-  };
+    const handleClickInput = () => {
+      if (document.activeElement === fileLabelRef.current) {
+        fileInputRef.current?.click();
+      }
+    };
 
-  useKeyPress(handleClickInput, 'Enter');
+    useKeyPress(handleClickInput, 'Enter');
 
-  return (
-    <label
-      ref={fileLabelRef}
-      onDrop={(event) => handleDrop(event)}
-      tabIndex={0}
-      onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      className={labelFileLoaderClassNames}
-      htmlFor="fileUploader"
-    >
-      <div className={styles.dropzone_text}>
-        <span>Перетащите ваши файлы сюда, либо кликните</span>
-        <LoadIcon className={styles.icon} />
-      </div>
-      <input
-        ref={fileInputRef}
-        tabIndex={-1}
-        id="fileUploader"
-        className={styles.input}
-        type="file"
-        onChange={(event) => handleChangeInputFiles(event)}
-        onClick={(event) => event.stopPropagation()}
-        multiple
-        accept={acceptUploadFormats}
-      />
-    </label>
-  );
-});
+    return (
+      <label
+        ref={fileLabelRef}
+        onDrop={(event) => handleDrop(event)}
+        tabIndex={0}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        className={labelFileLoaderClassNames}
+        htmlFor="fileUploader"
+      >
+        <div className={styles.dropzone_text}>
+          <span>Перетащите ваши файлы сюда, либо кликните</span>
+          <LoadIcon className={styles.icon} />
+        </div>
+        <input
+          ref={fileInputRef}
+          tabIndex={-1}
+          id="fileUploader"
+          className={styles.input}
+          type="file"
+          onChange={(event) => handleChangeInputFiles(event)}
+          onClick={(event) => event.stopPropagation()}
+          multiple
+          accept={acceptUploadFormats}
+        />
+      </label>
+    );
+  }
+);

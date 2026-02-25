@@ -1,34 +1,22 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Button, ConvertToList, ImagesList, ImageUploader, InputRange, Loader } from 'components';
 import { optimizedImages } from 'api/optimized-images';
-import { ConvertFormats } from 'types/formats';
-import { OptimizedImagesType } from 'types/files';
+import { useChangeImage } from 'hooks/useChangeImage';
+import { MAX_QUALITY_PERCENTAGE, MIN_QUALITY_PERCENTAGE } from 'constants/utils';
 
 import styles from './ImageUploadManager.module.scss';
-
-const MAX_QUALITY_PERCENTAGE = '100';
-const MIN_QUALITY_PERCENTAGE = '1';
-const DEFAULT_FORMAT = 'webp';
-
 export const ImageUploadManager = () => {
   const [initialFiles, setInitialFiles] = useState<FileList | null>(null);
-  const [optimizedFiles, setOptimizedFiles] = useState<Array<OptimizedImagesType>>([]);
-  const [qualityPercentage, setQualityPercentage] = useState(MAX_QUALITY_PERCENTAGE);
-  const [currentFormat, setCurrentFormat] = useState<ConvertFormats>(DEFAULT_FORMAT);
   const [isLoadingRequest, setIsLoadingRequest] = useState(false);
 
-  const handleSetOptimizedImages = (optimizedImages: Array<OptimizedImagesType>) => {
-    setOptimizedFiles(optimizedImages);
-  };
-
-  const handleChangeRange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const range = event.target.value;
-    setQualityPercentage(range);
-  }, []);
-
-  const handleSetActiveFormat = useCallback((format: ConvertFormats) => {
-    setCurrentFormat(format);
-  }, []);
+  const {
+    handleChangeRange,
+    handleSetActiveFormat,
+    handleSetOptimizedImages,
+    optimizedFiles,
+    qualityPercentage,
+    currentFormat,
+  } = useChangeImage();
 
   return (
     <div className={styles.content}>
@@ -44,7 +32,10 @@ export const ImageUploadManager = () => {
         currentFormat={currentFormat}
         setActiveConvertFormat={handleSetActiveFormat}
       />
-      <ImageUploader setInitialFiles={setInitialFiles} />
+      <ImageUploader
+        handleSetOptimizedImages={handleSetOptimizedImages}
+        setInitialFiles={setInitialFiles}
+      />
       {isLoadingRequest ? (
         <Loader className={styles.loader} />
       ) : (
